@@ -3,14 +3,31 @@
 
 char	*get_next_line(int fd)
 {
-	static char	read_line[BUFFER_SIZE];
+	static char	read_buf[BUFFER_SIZE + 1];
+	int	i;
+	char	*read_line;
+	int	len;
+	ssize_t	bytes_read;
 
-	read (fd, read_line, BUFFER_SIZE);
-	printf("%d#", read_line[2]);
-	printf("%d#", read_line[3]);
-		printf("%d#", read_line[25]);
 
-	
+	bytes_read = read (fd, read_buf, BUFFER_SIZE);
+	if (bytes_read <= 0)
+        return NULL;
+	read_buf[BUFFER_SIZE] = '\0';
+	len = 0;
+	//посчитаем длину до разрыва строки 
+	while (read_buf[len] != '\n' && len < BUFFER_SIZE)
+		len++;
+	read_line = malloc(sizeof(char) * (len + 1));
+	if (read_line == NULL)
+		return (NULL);
+	i = 0;
+	while (read_buf[i] != '\n' && i < BUFFER_SIZE)
+	{
+		read_line[i] = read_buf[i];
+		i++;
+	}
+	read_line[i] = '\0';
 	return (read_line);
 }
 
