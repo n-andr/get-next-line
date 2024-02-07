@@ -101,7 +101,7 @@ char *read_file(int fd, char *big_buf)
 		read_buf[BUFFER_SIZE] = '\0';
 		big_buf_dub = ft_strjoin(big_buf, read_buf);
 		free (big_buf);
-		big_buf = malloc (sizeof(char) * (ft_strlen(big_buf) + 1));
+		big_buf = malloc (sizeof(char) * (ft_strlen(big_buf_dub) + 1));
 		if (big_buf == NULL)
 		{
 			free (big_buf_dub);
