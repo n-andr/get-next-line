@@ -28,5 +28,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
 int	ft_strlen(char *str);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strchr(const char *s, int c);
+char	*split_buf(char *big_buf);
+char	*rewrite_buf(char *big_buf);
 
 # endif
