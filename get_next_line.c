@@ -100,7 +100,7 @@ char	*ft_strchr(const char *s, int c)
 // end c-p from utilis
 
 
-char	*rewrite_buf(char *big_buf)
+/* char	*rewrite_buf(char *big_buf)
 {
 	char	*big_buf_dub;
 	int	i;
@@ -119,7 +119,7 @@ char	*rewrite_buf(char *big_buf)
 	ft_strlcpy(big_buf, big_buf_dub, (ft_strlen(big_buf_dub) + 1));
 	free (big_buf_dub);
 	return (big_buf);
-}
+} */
 
 char	*split_buf(char *big_buf)
 {
@@ -133,7 +133,8 @@ char	*split_buf(char *big_buf)
 	if (read_line == NULL)
 		return (NULL);
 	ft_strlcpy (read_line, big_buf, (i + 2));
-	big_buf = rewrite_buf(big_buf);
+	//big_buf = rewrite_buf(big_buf);
+	ft_strlcpy(big_buf, (big_buf + i + 1), (ft_strlen(big_buf) - i));
 	//find /n and split in two
 	//разбить big_buf на линию, которую возвращаем и остаток big_buf  ---> in other function
 	return (read_line);
@@ -168,21 +169,30 @@ char	*read_file(int fd, char *big_buf)
 
 char	*get_next_line(int fd)
 {
-	
 	static char	*big_buf;
 	char	*read_line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	big_buf = read_file (fd, big_buf);
-	if (big_buf == NULL || *big_buf == '\0') // need to check if this syntax is correct maybe !big_buf
+	if (big_buf == NULL || *big_buf == '\0') // need to check if this syntax is correct maybe !big_buf 
 		return(NULL);
+		//need to free(big_buf);???
 	read_line = split_buf(big_buf);
-	 //printf("%s\n", big_buf);
+
+
+	//
+	//
+	//To DO: work with the end of the file
+	//
+	//
+
+
+	//printf("BIG_BUF:%s\n", big_buf); 
 	return (read_line);
 }
 
-// #include <stdio.h>
+/* // #include <stdio.h>
 #include <fcntl.h>
 
 int	main()
@@ -201,12 +211,14 @@ int	main()
 	// int	chars_read;
 
 	fd = open ("file.txt", O_RDWR);
-	printf ("%s\n", get_next_line(fd));
-	// printf ("%s\n", get_next_line(fd));
-	// printf ("%s\n", get_next_line(fd));
-	// printf ("%s\n", get_next_line(fd));
-	// printf ("%s\n", get_next_line(fd));
-	// printf ("%s\n", get_next_line(fd));
+	printf ("%s", get_next_line(fd));
+	printf ("%s", get_next_line(fd));
+	printf ("%s", get_next_line(fd));
+	printf ("%s", get_next_line(fd));
+	printf ("%s", get_next_line(fd));
+	printf ("%s", get_next_line(fd));
+	//printf ("%s", get_next_line(fd));
+	
 
 // printf("line27");
 // fflush(stdout);
@@ -218,4 +230,4 @@ int	main()
 	// 	printf ("line 40 char: %s\n", buf);
 	// }
 	return (0);
-}
+} */
