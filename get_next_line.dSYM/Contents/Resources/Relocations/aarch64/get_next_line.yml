@@ -2,15 +2,14 @@
 triple:          'arm64-apple-darwin'
 binary-path:     '/Users/Natalia/Documents/Learn/42/42 core/get-next-line/get_next_line'
 relocations:
-  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _ft_strlen, symObjAddr: 0x0, symBinAddr: 0x100003718, symSize: 0x78 }
-  - { offsetInCU: 0x33, offset: 0x33, size: 0x8, addend: 0x0, symName: _get_next_line, symObjAddr: 0x6FC, symBinAddr: 0x100003E14, symSize: 0xCC }
-  - { offsetInCU: 0x58, offset: 0x58, size: 0x8, addend: 0x0, symName: _get_next_line.big_buf, symObjAddr: 0x1708, symBinAddr: 0x100008000, symSize: 0x0 }
-  - { offsetInCU: 0x91, offset: 0x91, size: 0x8, addend: 0x0, symName: _ft_strlen, symObjAddr: 0x0, symBinAddr: 0x100003718, symSize: 0x78 }
-  - { offsetInCU: 0xC7, offset: 0xC7, size: 0x8, addend: 0x0, symName: _ft_strlcpy, symObjAddr: 0x78, symBinAddr: 0x100003790, symSize: 0x124 }
-  - { offsetInCU: 0x119, offset: 0x119, size: 0x8, addend: 0x0, symName: _ft_strjoin, symObjAddr: 0x19C, symBinAddr: 0x1000038B4, symSize: 0x11C }
-  - { offsetInCU: 0x16B, offset: 0x16B, size: 0x8, addend: 0x0, symName: _ft_strchr, symObjAddr: 0x2B8, symBinAddr: 0x1000039D0, symSize: 0xAC }
-  - { offsetInCU: 0x1BD, offset: 0x1BD, size: 0x8, addend: 0x0, symName: _rewrite_buf, symObjAddr: 0x364, symBinAddr: 0x100003A7C, symSize: 0x16C }
-  - { offsetInCU: 0x201, offset: 0x201, size: 0x8, addend: 0x0, symName: _split_buf, symObjAddr: 0x4D0, symBinAddr: 0x100003BE8, symSize: 0xC4 }
-  - { offsetInCU: 0x245, offset: 0x245, size: 0x8, addend: 0x0, symName: _read_file, symObjAddr: 0x594, symBinAddr: 0x100003CAC, symSize: 0x168 }
-  - { offsetInCU: 0x2A5, offset: 0x2A5, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x7C8, symBinAddr: 0x100003EE0, symSize: 0x58 }
+  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _ft_strlen, symObjAddr: 0x0, symBinAddr: 0x1000035FC, symSize: 0x78 }
+  - { offsetInCU: 0x33, offset: 0x33, size: 0x8, addend: 0x0, symName: _get_next_line, symObjAddr: 0x6E0, symBinAddr: 0x100003CDC, symSize: 0xAC }
+  - { offsetInCU: 0x58, offset: 0x58, size: 0x8, addend: 0x0, symName: _get_next_line.big_buf, symObjAddr: 0x17F8, symBinAddr: 0x100008000, symSize: 0x0 }
+  - { offsetInCU: 0x91, offset: 0x91, size: 0x8, addend: 0x0, symName: _ft_strlen, symObjAddr: 0x0, symBinAddr: 0x1000035FC, symSize: 0x78 }
+  - { offsetInCU: 0xC7, offset: 0xC7, size: 0x8, addend: 0x0, symName: _ft_strlcpy, symObjAddr: 0x78, symBinAddr: 0x100003674, symSize: 0x124 }
+  - { offsetInCU: 0x119, offset: 0x119, size: 0x8, addend: 0x0, symName: _ft_strjoin, symObjAddr: 0x19C, symBinAddr: 0x100003798, symSize: 0x11C }
+  - { offsetInCU: 0x16B, offset: 0x16B, size: 0x8, addend: 0x0, symName: _ft_strchr, symObjAddr: 0x2B8, symBinAddr: 0x1000038B4, symSize: 0xAC }
+  - { offsetInCU: 0x1BD, offset: 0x1BD, size: 0x8, addend: 0x0, symName: _split_buf, symObjAddr: 0x364, symBinAddr: 0x100003960, symSize: 0x1A8 }
+  - { offsetInCU: 0x201, offset: 0x201, size: 0x8, addend: 0x0, symName: _read_file, symObjAddr: 0x50C, symBinAddr: 0x100003B08, symSize: 0x1D4 }
+  - { offsetInCU: 0x261, offset: 0x261, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x78C, symBinAddr: 0x100003D88, symSize: 0x1AC }
 ...

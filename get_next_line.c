@@ -127,14 +127,26 @@ char	*split_buf(char *big_buf)
 	int	i;
 
 	i = 0;
-	while (big_buf[i] != '\n')
+	while (big_buf[i] != '\n' && big_buf[i] != '\0')
 		i ++;
-	read_line = malloc (sizeof(char) * (i + 2));
-	if (read_line == NULL)
-		return (NULL);
-	ft_strlcpy (read_line, big_buf, (i + 2));
+	if (big_buf[i] == '\n')
+	{
+		read_line = malloc (sizeof(char) * (i + 2));
+		if (read_line == NULL)
+			return (NULL);
+		ft_strlcpy (read_line, big_buf, (i + 2));
+		ft_strlcpy(big_buf, (big_buf + i + 1), (ft_strlen(big_buf) - i));
+	}
+	else
+	{
+		read_line = malloc (sizeof(char) * (i + 1));
+		if (read_line == NULL)
+			return (NULL);
+		ft_strlcpy (read_line, big_buf, (i + 1));
+		*big_buf = '\0';
+	}
 	//big_buf = rewrite_buf(big_buf);
-	ft_strlcpy(big_buf, (big_buf + i + 1), (ft_strlen(big_buf) - i));
+	
 	//find /n and split in two
 	//разбить big_buf на линию, которую возвращаем и остаток big_buf  ---> in other function
 	return (read_line);
@@ -146,13 +158,16 @@ char	*read_file(int fd, char *big_buf)
 	char	*big_buf_dub;
 	int		bytes_read;
 
+	bytes_read = -1;
 	read_buf[0] = '\0';
-	while (ft_strchr(read_buf, '\n') == NULL)
+	while (ft_strchr(read_buf, '\n') == NULL && bytes_read != 0)
 	{
 		bytes_read = read (fd, read_buf, BUFFER_SIZE);
 		if (bytes_read < 0)
 			return (NULL);
-		read_buf[BUFFER_SIZE] = '\0';
+		if (0 <= bytes_read && bytes_read <= BUFFER_SIZE) //can remove this line
+			read_buf[bytes_read] = '\0';
+		//read_buf[BUFFER_SIZE] = '\0'; //заменила в ифе на равно буфер_сайз
 		big_buf_dub = ft_strjoin(big_buf, read_buf);
 		free (big_buf);
 		big_buf = malloc (sizeof(char) * (ft_strlen(big_buf_dub) + 1));
@@ -179,16 +194,6 @@ char	*get_next_line(int fd)
 		return(NULL);
 		//need to free(big_buf);???
 	read_line = split_buf(big_buf);
-
-
-	//
-	//
-	//To DO: work with the end of the file
-	//
-	//
-
-
-	//printf("BIG_BUF:%s\n", big_buf); 
 	return (read_line);
 }
 
@@ -210,14 +215,22 @@ int	main()
 	// char	buf[256];
 	// int	chars_read;
 
-	fd = open ("file.txt", O_RDWR);
+	//fd = open ("file.txt", O_RDWR);
+	//fd = open ("empty_file.txt", O_RDWR);
+	fd = open ("41_with_nl.txt", O_RDWR);
 	printf ("%s", get_next_line(fd));
 	printf ("%s", get_next_line(fd));
 	printf ("%s", get_next_line(fd));
 	printf ("%s", get_next_line(fd));
 	printf ("%s", get_next_line(fd));
 	printf ("%s", get_next_line(fd));
-	//printf ("%s", get_next_line(fd));
+	printf ("%s", get_next_line(fd));
+	printf ("%s", get_next_line(fd));
+	printf ("%s", get_next_line(fd));
+	printf ("%s", get_next_line(fd));
+	printf ("%s", get_next_line(fd));
+	printf ("%s", get_next_line(fd));
+	printf ("%s", get_next_line(fd));
 	
 
 // printf("line27");
