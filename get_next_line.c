@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:49:22 by nandreev          #+#    #+#             */
-/*   Updated: 2024/02/07 14:49:42 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/02/14 14:50:48 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,17 +154,24 @@ char	*split_buf(char *big_buf)
 
 char	*read_file(int fd, char *big_buf)
 {
-	char	read_buf[BUFFER_SIZE + 1];
+	char	*read_buf;
 	char	*big_buf_dub;
 	int		bytes_read;
 
 	bytes_read = -1;
+	read_buf = malloc (sizeof(char) * (BUFFER_SIZE + 1));
+	if (read_buf == NULL)
+		return (NULL);
 	read_buf[0] = '\0';
-	while (ft_strchr(read_buf, '\n') == NULL && bytes_read != 0)
+	while (ft_strchr(read_buf, '\n') == NULL && bytes_read != 0) // can do !ft_strchr(stash, '\n')???
 	{
 		bytes_read = read (fd, read_buf, BUFFER_SIZE);
 		if (bytes_read < 0)
+		{
+			free (read_buf);
+			free (big_buf);
 			return (NULL);
+		}
 		if (0 <= bytes_read && bytes_read <= BUFFER_SIZE) //can remove this line
 			read_buf[bytes_read] = '\0';
 		//read_buf[BUFFER_SIZE] = '\0'; //заменила в ифе на равно буфер_сайз
@@ -174,11 +181,13 @@ char	*read_file(int fd, char *big_buf)
 		if (big_buf == NULL)
 		{
 			free (big_buf_dub);
+			free (read_buf);
 			return (NULL);
 		}
 		ft_strlcpy(big_buf, big_buf_dub, (ft_strlen(big_buf_dub)+1));
 		free (big_buf_dub);
 	}
+	free (read_buf);
 	return(big_buf);
 }
 
@@ -215,9 +224,9 @@ int	main()
 	// char	buf[256];
 	// int	chars_read;
 
-	//fd = open ("file.txt", O_RDWR);
+	fd = open ("file.txt", O_RDWR);
 	//fd = open ("empty_file.txt", O_RDWR);
-	fd = open ("41_with_nl.txt", O_RDWR);
+	//fd = open ("41_with_nl.txt", O_RDWR);
 	printf ("%s", get_next_line(fd));
 	printf ("%s", get_next_line(fd));
 	printf ("%s", get_next_line(fd));
@@ -232,6 +241,8 @@ int	main()
 	printf ("%s", get_next_line(fd));
 	printf ("%s", get_next_line(fd));
 	
+	close(fd);
+	get_next_line(-1); // freeing stash
 
 // printf("line27");
 // fflush(stdout);

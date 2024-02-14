@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:49:15 by nandreev          #+#    #+#             */
-/*   Updated: 2024/02/07 14:49:18 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/02/14 14:50:03 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 20
+#  define BUFFER_SIZE 42
 # endif
 
 #include <unistd.h>
