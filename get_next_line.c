@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:49:22 by nandreev          #+#    #+#             */
-/*   Updated: 2024/02/15 16:43:52 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/02/15 17:25:12 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*split_buf(char *big_buf)
 {
 	char	*read_line;
-	int	i;
+	int		i;
 
 	i = 0;
 	while (big_buf[i] != '\n' && big_buf[i] != '\0')
@@ -39,10 +39,27 @@ char	*split_buf(char *big_buf)
 	return (read_line);
 }
 
+char	*join_bufs(char *big_buf, char *read_buf)
+{
+	char	*big_buf_dub;
+
+	big_buf_dub = ft_strjoin(big_buf, read_buf);
+	free (big_buf);
+	big_buf = malloc (sizeof(char) * (ft_strlen(big_buf_dub) + 1));
+	if (big_buf == NULL)
+	{
+		free (big_buf_dub);
+		free (read_buf);
+		return (NULL);
+	}
+	ft_strlcpy(big_buf, big_buf_dub, (ft_strlen(big_buf_dub)+1));
+	free (big_buf_dub);
+	return (big_buf);
+}
+
 char	*read_file(int fd, char *big_buf)
 {
 	char	*read_buf;
-	char	*big_buf_dub;
 	int		bytes_read;
 
 	bytes_read = -1;
@@ -60,28 +77,18 @@ char	*read_file(int fd, char *big_buf)
 			return (NULL);
 		}
 		if (bytes_read == 0)
-			break;
+			break ;
 		read_buf[bytes_read] = '\0';
-		big_buf_dub = ft_strjoin(big_buf, read_buf);
-		free (big_buf);
-		big_buf = malloc (sizeof(char) * (ft_strlen(big_buf_dub) + 1));
-		if (big_buf == NULL)
-		{
-			free (big_buf_dub);
-			free (read_buf);
-			return (NULL);
-		}
-		ft_strlcpy(big_buf, big_buf_dub, (ft_strlen(big_buf_dub)+1));
-		free (big_buf_dub);
+		big_buf = join_bufs(big_buf, read_buf);
 	}
 	free (read_buf);
-	return(big_buf);
+	return (big_buf);
 }
 
 char	*get_next_line(int fd)
 {
 	static char	*big_buf;
-	char	*read_line;
+	char		*read_line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 	{
@@ -103,8 +110,7 @@ char	*get_next_line(int fd)
 	return (read_line);
 }
 
- 
-#include <fcntl.h>
+/* #include <fcntl.h>
 #include <stdio.h>
 
 int	main()
@@ -141,16 +147,16 @@ int	main()
 	line = get_next_line(fd);
 	printf("%s", line);
 	free(line);
-	line = get_next_line(fd);
-	printf("%s", line);
-	free(line);
-	line = get_next_line(fd);
-	printf("%s", line);
-	free(line);
+	// line = get_next_line(fd);
+	// printf("%s", line);
+	// free(line);
+	// line = get_next_line(fd);
+	// printf("%s", line);
+	// free(line);
 	
 	
 	close(fd);
 	get_next_line(-1); // freeing big_buf
 
 	return (0);
-} 
+}  */
