@@ -172,7 +172,9 @@ char	*read_file(int fd, char *big_buf)
 			free (big_buf);
 			return (NULL);
 		}
-		if (0 <= bytes_read && bytes_read <= BUFFER_SIZE) //can remove this line
+		if (bytes_read == 0)
+			break;
+		if (0 < bytes_read && bytes_read <= BUFFER_SIZE) //can remove this line
 			read_buf[bytes_read] = '\0';
 		//read_buf[BUFFER_SIZE] = '\0'; //заменила в ифе на равно буфер_сайз
 		big_buf_dub = ft_strjoin(big_buf, read_buf);
@@ -203,6 +205,12 @@ char	*get_next_line(int fd)
 		return(NULL);
 		//need to free(big_buf);???
 	read_line = split_buf(big_buf);
+	if (ft_strlen(big_buf) == 0)
+	{
+		free(big_buf);
+		big_buf = NULL;
+	}
+	// printf("big_buf is NULL 5: %d\n", big_buf == NULL);
 	return (read_line);
 }
 
